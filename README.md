@@ -49,6 +49,11 @@ If you want to hire me, you only have to write me.
 
 - szxrocode@gmail.com (@Szxro)
 
+# Link
+
+https://szxro.github.io/Portfolio__1.0/
+
+
 
 
 
