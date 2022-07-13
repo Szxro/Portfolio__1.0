@@ -1,0 +1,602 @@
+@use 'variable';
+
+*,
+*::before,
+*::after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    background-image: url(../images/dark.png);
+    line-height: 1.7;
+    font-family:variable.$font-family;
+}
+/*
+===============
+Layout
+===============
+*/
+
+.header{
+   padding: 1em;
+}
+
+.nav{
+    display: none;
+}
+
+
+.hamburger {
+	position: relative;
+	display: block;
+	width: 35px;
+	cursor: pointer;
+    float: right;
+    z-index: 98;
+	
+	appearance: none;
+	background: none;
+	outline: none;
+	border: none;
+
+    & .bar, &::after, &::before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 5px;
+        background-color: variable.selector(variable.$colors,white-color);
+        margin: 6px 0px;
+        transition: 0.4s;
+    }
+
+    &.hamburger.is-active:before{
+        transform: rotate(-45deg) translate(-8px, 6px);
+    }
+
+    &.is-active:after {
+	    transform: rotate(45deg) translate(-9px, -8px);
+    }
+
+    &.is-active .bar {
+	    opacity: 0;
+    }  
+
+    &.fixed{
+        position: fixed;
+        right: 10px;
+    }
+}
+
+
+.header__icon{
+    display: none;
+}
+
+.nav{
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    min-height: 100vh;
+    background-color: variable.selector(variable.$colors,dark-blue);
+    transition: 0.4s;
+    z-index: 98;
+
+    &.is-active{
+        left: 0;
+    }
+
+    &__list{
+        width: max-content;
+        height: 100vh;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    &__link{
+        text-decoration: none;
+        color: variable.selector(variable.$colors,light-color);
+
+        &:focus,&:hover{
+            color: variable.selector(variable.$colors,white-color);
+        }
+
+        
+    }
+}
+
+
+.wrapper{
+    width: 90%;
+    max-width: 1500px;
+    margin:auto;
+    margin-top: 2.2em;
+}
+
+.aside__social,
+.aside{
+    display: none;
+}
+
+.section__divider{
+    width: 48px;
+    height: 4px;
+    border-radius: 10px;
+    margin-top: 1em;
+    background: variable.selector(variable.$colors,linear-divider);
+    margin-bottom: 0.5em;
+}
+.section__about{
+    margin-bottom: 1.2em;
+}
+.section__text,
+.tecnologies{
+    margin-top: 0.4em;
+}
+
+.section__container{
+    width: max-content;
+    margin-top: 1em;
+}
+
+
+.tecnologies{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    list-style: none;
+    
+    &__item{
+        color: variable.selector(variable.$colors,white-color);
+
+        &::before{
+            content: "";
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin-right: 1em;
+            background-color: variable.selector(variable.$colors,white-color);
+        }
+    }
+}
+
+.btn{
+    appearance: none;
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 0.40em 1.1em;
+    font-family: variable.$font-family;
+    font-weight: variable.selector(variable.$font-weight,semi-bold);
+    border-radius: 8px;
+    transition: 0.4s;
+
+    &{
+        color: variable.selector(variable.$colors,white-blue);
+        border: 3px solid variable.selector(variable.$colors,white-blue);
+    }
+
+    &--margin{
+        margin-top: 1em;
+        margin-right: 0.5em;
+        margin-bottom: 1em;
+    }
+
+    &:hover{
+       color: variable.selector(variable.$colors,dark-blue);
+       background: variable.selector(variable.$colors,white-blue);
+       border-color: variable.selector(variable.$colors,white-blue);
+    }
+
+}
+
+.btn__link{
+    text-decoration: none;
+}
+
+.skills{
+    width: 100%;
+    max-width: 800px;
+    border-radius: 10px;
+    background-color: transparent;
+    padding: 1.5em 1.875em;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
+
+    &,&__bar{
+        margin: 20px 0;
+
+        &:first-child{
+            margin-top: 0px;
+        }
+    }
+
+    &__language{
+        font-size: 1.1rem;
+        color: variable.selector(variable.$colors,white-blue);
+        font-weight: variable.selector(variable.$font-weight,semi-bold);
+    }
+
+    &__progress{
+        position: relative;
+        height: 10px;
+        width: 100%;
+        border-radius: 10px;
+        background: variable.selector(variable.$colors,skills-background);
+        box-shadow: inset 0px 1px 1px rgba(0, 0,0, 0.05),
+        0px 1px rgba(255, 255,255, 0.8);
+    }
+
+    &__info{
+        margin-bottom: 5px;
+    }
+}
+
+
+.progress__span{
+    position: absolute;
+    height: 100%;
+    width: 80%;
+    background-color:variable.selector(variable.$colors,dark-blue-variant) ;
+    border-radius: 10px;
+
+    &::before{
+        position: absolute;
+        content: "";
+        right: 0;
+        top: -10px;
+        height: 0;
+        width: 0;
+        border: 7px solid transparent;
+        border-bottom-width: 0px;
+        border-right-width: 0px;
+        border-top-color: variable.selector(variable.$colors,black-color);
+    }
+
+    &::after{
+        position: absolute;
+        right: 0;
+        top: -28px;
+        color: variable.selector(variable.$colors,white-color);
+        background-color:variable.selector(variable.$colors,black-color);
+        font-size: 0.75em;
+        padding: 1px 8px;
+        border-radius: 3px;
+    }
+}
+
+//Span languahges
+.html::after{
+    content: "80%";
+}
+
+.css::after{
+    content: "60%";
+}
+.sass::after{
+    content: "50%";
+}
+.js::after{
+    content: "60%";
+}
+.react::after{
+    content: "55%";
+}
+
+//Span progress line
+
+.html{
+    width: 80%;
+}
+
+.css{
+    width: 60%;
+}
+
+.sass{
+    width: 50%;
+}
+
+.js{
+    width: 60%;
+}
+
+.react{
+    width: 55%;
+}
+
+.projects{
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    place-items:center;
+    gap: 1em;
+}
+
+.card{
+    margin-top: 1.2em;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 5px;
+    padding: 1.5em;
+    background-color: variable.selector(variable.$colors,dark-violer);
+
+    &__menu{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__list{
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 1.6em;
+    }
+
+    &__link{
+        text-decoration: none;
+    }
+
+    &__folder,
+    &__github,
+    &__link{
+        font-size: 1.25rem;
+        color: variable.selector(variable.$colors,light-color);
+        transition: 0.4s;
+
+        &:hover{
+            color: variable.selector(variable.$colors,white-blue);
+        }
+    }
+
+    &__tittle{
+        color: variable.selector(variable.$colors,white-blue);
+        font-size: 1.3rem;
+    }
+    &__text{
+        font-size: 1rem;
+        color: variable.selector(variable.$colors,light-color);
+    }
+}
+
+.card__footer{
+    width: 100%;
+    margin-top: 1em;
+    display: flex;
+    gap: 1.2em;
+    list-style: none;
+}
+
+.footer__item{
+    color: variable.selector(variable.$colors,white-blue);
+    font-size: 0.85rem;
+}
+
+/*Contact*/
+
+.contact{
+    width: 100%;
+    max-width: 800px;
+    
+    &__text{
+        text-align: center;
+        color: variable.selector(variable.$colors,light-color);
+    }
+}
+
+.form{
+    width: 100%;
+    padding: 2.8125em;
+    display:grid;
+    grid-template-columns: repeat(1,1fr);
+    place-items: center;
+    margin-top: 1.2em;
+    gap: 3.5em;
+    border-radius: 10px;
+
+    &__tittle{
+        color: variable.selector(variable.$colors,white-blue);
+    }
+
+    &__box{
+        width: 100%;
+        position: relative;;
+    }
+
+    &__input{
+        display: block;
+        font-family: variable.$font-family;
+        font-size: 1.1rem;
+        color: variable.selector(variable.$colors,white-color);
+        width: 100%;
+        background: none;
+        outline: none;
+        border: none;
+
+        &{
+            border-bottom: 1px solid variable.selector(variable.$colors,white-color);
+        }
+
+        &--resize{
+            resize: none;
+            overflow: hidden;
+        }
+    }
+
+    &__label{
+        color: variable.selector(variable.$colors,light-color) ;
+        position: absolute;
+        font-size: 1.1rem;
+        top: -10px;
+        transition: 0.5s ease all;
+        pointer-events: none;
+    }
+
+    &__input:focus~&__label,
+    &__input:valid~&__label{
+        font-size: 1.2rem;
+        top:-30px;
+        color: variable.selector(variable.$colors,white-blue);
+    }
+
+    &__span{
+        position: relative;
+        display: block;
+    
+        &::before{
+            content: "";
+            height: 2px;
+            width: 0%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: variable.selector(variable.$colors,white-blue);
+            transition: 0.3s ease all;
+        }
+      }
+      &__input:focus~&__span::before,
+      &__input:valid~&__span::before{
+        width: 100%;
+      }
+}
+
+
+@media(min-width:variable.$tablet){
+    .btn{
+        font-size: 1.2rem;
+        padding: 0.50em 1.2em;
+    }
+    .section__divider{
+        width: 68px;
+        height: 6px;
+    }
+}
+
+
+@media(min-width:variable.$laptop){
+    .hamburger{
+        display: none;
+    }
+
+    .nav{
+        position: absolute;
+        top: 0;
+        left:0;
+        padding: 30px;
+        width: 100%;
+        min-height: auto;
+        background: none;
+        flex-direction: row;
+        justify-content: flex-end;
+        
+
+        &__list{
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+
+    }
+    .header__icon{
+        display: block;
+        max-width: max-content;
+        margin-top: 0.5em;
+    }
+
+    .gamepad-icon{
+        font-size: 2rem;
+        color: variable.selector(variable.$colors,white-color);
+    }
+
+    .wrapper{
+        position: relative;
+        margin-top: 4em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .section__text{
+        text-align: justify;
+        max-width:750px;
+    }
+    .projects{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media(min-width:variable.$desktop){
+    .nav{
+        &__list{
+            max-width: 1000px;
+        }
+    }
+    .aside,
+    .aside__social{
+        position: absolute;
+        display: block;
+    }
+    .aside{
+        width: max-content;
+        right: 0;
+        transform: rotate(90deg);
+        &__gmail{
+            font-size: 1.2rem;
+            color: variable.selector(variable.$colors,light-color);
+            transition: 0.4s;
+
+            &:hover{
+                font-size: 1.3rem;
+                color:  variable.selector(variable.$colors,white-blue);
+            }
+        }
+    }
+
+    .aside__social{
+        left: 0;
+    }
+
+    .social{
+        list-style: none;
+        &::before{
+            content: "";
+            display:block;
+            width: 1px;
+            height: 5rem;
+            background-color: variable.selector(variable.$colors,white-blue);
+        }
+
+        &__link{
+            text-decoration: none;
+            cursor: pointer;
+        }
+        &__icon{
+            font-size: 1.2rem;
+            margin-top: 1em;
+            color: variable.selector(variable.$colors,light-color);
+
+
+            &:hover{
+               color:  variable.selector(variable.$colors,white-blue);
+            }
+        }
+    }
+
+}

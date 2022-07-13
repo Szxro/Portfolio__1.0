@@ -1,0 +1,76 @@
+@use 'variable';
+
+
+/*
+===============
+Typography
+===============
+*/
+
+.section__greet{
+    font-size: 1rem;
+    font-weight:variable.selector(variable.$font-weight,light);
+    color: variable.selector(variable.$colors,white-blue);
+}
+
+.section__name{
+    font-size: 1.5rem;
+    font-weight: variable.selector(variable.$font-weight,bold);
+    color: variable.selector(variable.$colors,white-color);
+}
+
+.section__proffesion{
+    font-size: 1.3rem;
+    font-weight: variable.selector(variable.$font-weight,bold);
+    color: variable.selector(variable.$colors,white-blue);
+}
+
+.section__paragraph{
+    font-size: 1rem;
+    font-weight: variable.selector(variable.$font-weight,bold);
+    color: variable.selector(variable.$colors,light-color);
+}
+
+.section__tittle{
+    font-size: 1.3rem;
+    color: variable.selector(variable.$colors,white-color);
+}
+.span{
+    color:variable.selector(variable.$colors,light-color); 
+    font-weight: variable.selector(variable.$font-weight,semi-bold);
+}
+
+.section__text{
+    color: variable.selector(variable.$colors,white-blue);
+    font-weight:variable.selector(variable.$font-weight,light) ;
+}
+
+.tecnologies__item{
+    font-size: 0.87rem;
+}
+
+@media (min-width:variable.$tablet) {
+     .section__greet{
+        font-size: 1.3rem;
+     }
+     .section__name,
+     .section__proffesion{
+        font-size: 2rem;
+     }
+
+     .section__paragraph{
+        font-size: 1.2rem;
+        max-width: 800px;
+     }
+    //Universal Title
+     .section__tittle{
+        font-size: 1.4rem;
+     }
+     //Section-About
+     .section__text,
+     .span,
+     .tecnologies__item,
+     .nav__link{
+        font-size: 1.2rem;
+     }
+}
